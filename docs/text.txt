@@ -1,0 +1,16 @@
+Company: TechCorp Solutions
+Founded: 2018
+CEO: Jane Doe
+
+Products:
+- SmartDesk: An AI-powered project management tool
+- DataVault: A secure cloud storage platform
+- InsightBot: A customer support chatbot
+
+Pricing:
+- SmartDesk starts at $29/month per user
+- DataVault offers 100GB free, then $9/month per 1TB
+- InsightBot enterprise plans start at $199/month
+
+Support: contact support@techcorp.com or call +1-800-555-0199
+Office Hours: Monday to Friday, 9am to 6pm EST
