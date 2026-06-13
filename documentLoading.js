@@ -1,11 +1,20 @@
 import dotenv from "dotenv";
+import { fileURLToPath } from "node:url";
 import { PDFLoader } from "@langchain/community/document_loaders/fs/pdf";
 import { CSVLoader } from "@langchain/community/document_loaders/fs/csv";
-import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import {
+  ChatGoogleGenerativeAI,
+  GoogleGenerativeAIEmbeddings,
+} from "@langchain/google-genai";
 
 dotenv.config();
 
-const catchAsync =
+const MODELS = {
+  geminiChatModel: "gemini-3.5-flash",
+  geminiEmbeddingModel: "gemini-embedding-2",
+};
+
+export const catchAsync =
   (fn) =>
   async (...args) => {
     try {
@@ -16,8 +25,10 @@ const catchAsync =
   };
 
 const ragMain = catchAsync(async () => {
+  loadPDF();
+
   const llm = new ChatGoogleGenerativeAI({
-    model: "gemini-3.5-flash",
+    model: MODELS.geminiChatModel,
     apiKey: process.env.GEMINI_API_KEY,
     temperature: 0,
   });
@@ -41,5 +52,4 @@ const loadPDF = catchAsync(async () => {
   console.log(documents);
 });
 
-ragMain();
-loadPDF();
+if (process.argv[1] === fileURLToPath(import.meta.url)) ragMain();
