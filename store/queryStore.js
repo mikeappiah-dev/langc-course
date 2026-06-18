@@ -2,6 +2,12 @@ import { fileURLToPath } from "node:url";
 
 import { Chroma } from "@langchain/community/vectorstores/chroma";
 import { GoogleGenerativeAIEmbeddings } from "@langchain/google-genai";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+import {
+  RunnablePassthrough,
+  RunnableSequence,
+} from "@langchain/core/runnables";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 import { collectionName } from "./vectorStore.js";
 import { catchAsync } from "../documentLoading.js";
@@ -29,6 +35,8 @@ const queryVectorStore = async () => {
     collectionName: collectionName,
     url: "http://localhost:8000",
   });
+
+  vectorStore.asRetriever();
 
   return vectorStore;
 };

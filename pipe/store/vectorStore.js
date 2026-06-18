@@ -10,7 +10,7 @@ import { loadPdf } from "../documentLoaders/pdfLoader.js";
 
 configDotenv({ path: "../.env" });
 
-export const COLLECTION_NAME = "Test_Collection";
+export const COLLECTION_NAME = "Test_Collection_v2";
 
 export const URL = "http://localhost:8000";
 
@@ -23,7 +23,7 @@ const createVectorStore = catchAsync(async () => {
 
   const recursiveTextSplitter = new RecursiveCharacterTextSplitter({
     chunkSize: 600,
-    chunkOverlap: 60,
+    chunkOverlap: 80,
   });
 
   const documents = await recursiveTextSplitter.splitDocuments(lodedDocs);
@@ -41,5 +41,6 @@ const createVectorStore = catchAsync(async () => {
   return vectorStore;
 });
 
-if (process.argv[1] === fileURLToPath(import.meta.url))
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
   console.log(await createVectorStore());
+}
